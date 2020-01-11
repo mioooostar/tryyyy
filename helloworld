@@ -1,0 +1,110 @@
+#include <stdio.h>
+#define OK 1
+#define ERROR 0
+
+typedef int Status;
+typedef struct Complex{
+	double re;
+	double im;
+}Complex;
+
+
+Status CreateComplex(Complex &C,double x,double y){//由输入的实部和虚部生成一个复数
+	C.re=x;//实部 
+	C.im=y;//虚部 
+}//CreateComplex
+
+
+Status AddComplex(Complex &C,Complex &C1,Complex &C2){//两个复数求和 
+	C.re=C1.re+C2.re;//实部是原来两个实部的和 
+	C.im=C1.im+C2.im;//虚部是原来两个虚部的和 
+	return OK;
+}//AddComplex
+
+Status SubComplex(Complex &C,Complex &C1,Complex &C2){//两个复数求差 
+	C.re=C1.re-C2.re;//实部是原来两个实数的差 
+	C.im=C1.im-C2.im;//虚部是原来两个虚部的差 
+	return OK;
+}//SubComplex
+
+Status MulComplex(Complex &C,Complex &C1,Complex &C2){//两个复数求积 
+	C.re=C1.re*C2.re-C1.im*C2.im;
+	C.im=C1.im*C2.re+C1.re*C2.im;
+	return OK;
+}//MulComplex
+
+Status print(Complex C){//输出结果，若结果是实数，则输出实数;若结果是复数，则输出复数 
+	printf("%lf+%lfi",C.re,C.im);
+	return 0;
+}
+
+
+int mian (){
+	double a,b,m,n;
+	Complex C1,C2,C;
+	int i;
+	printf("请输入第一个复数的实部和虚部、第二个复数的实部和虚部\n");
+	while(scanf("%lf%lf%lf%lf", &a, &b, &m, &n) != EOF ){
+		CreateComplex(C1,a,b);
+		CreateComplex(C2,m,n);
+		//输出复数 
+		printf("请输入要进行的操作选项\n1 :两个复数相加\n2 :第一个复数减第二个复数\n3 :两个复数相乘\n4 :退出\n");
+		scanf("%d",&i);
+		switch(i){
+			case 1:
+				AddComplex(C,C1,C2);
+				printf("相加后的结果是:");
+				print(C);
+				printf("\n");
+				break;
+			
+			case 2:
+				SubComplex(C,C1,C2);
+				printf("相减后的结果是:");
+				print(C);
+				printf("\n");
+				break;	
+			
+			case 3:
+				MulComplex(C,C1,C2);
+				printf("相乘后的结果是:");
+				print(C);
+				printf("\n");
+				break;
+			
+			case 4:
+				return 0;
+			
+			default:
+				printf("输入错误，请重新输入\n");
+				
+		}
+		return 0;	
+	}
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
